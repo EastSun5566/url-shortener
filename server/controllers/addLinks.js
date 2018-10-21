@@ -23,7 +23,11 @@ module.exports = (req, res) => {
       const link = new Link(body);
       return link.save();
     })
-    .then(link => res.status(200).send(link))
+    .then((link) => {
+      const linkObj = link.toObject();
+      linkObj.shortUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}/${customizedPath}`;
+      res.status(200).send(linkObj);
+    })
     .catch(({ errors }) => {
       const err = Object
         .values(errors)

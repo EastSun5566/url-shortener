@@ -7,6 +7,7 @@
       <hr class="my-4">
 
       <form
+        v-if="!submitted"
         class="lead"
         @submit.prevent="getShortUrl">
 
@@ -18,8 +19,9 @@
             id="inputLarge"
             v-model="link.originalUrl"
             class="form-control form-control-lg"
-            type="text"
-            placeholder="例如： https://github.com/EastSun5566">
+            type="url"
+            placeholder="例如： https://github.com/EastSun5566"
+            required>
         </div>
 
         <div class="form-group">
@@ -31,31 +33,75 @@
             v-model="link.customizedPath"
             class="form-control form-control-lg"
             type="text"
-            placeholder="例如： chill-out">
+            placeholder="例如： chill-out"
+            required>
         </div>
 
-        <button
-          type="submit"
-          class="btn btn-primary btn-lg">GOGO 🚀</button>
+        <div class="text-right">
+          <button
+            :disabled="loading"
+            type="submit"
+            class="btn btn-primary btn-lg">GOGO 🚀</button>
+        </div>
       </form>
+
+      <div
+        v-else
+        class="card text-white bg-primary">
+        <button
+          type="button"
+          class="close text-white text-right mr-2"
+          @click="submitted = false">&times;</button>
+        <h3 class="card-header display-4">恭喜 🎉</h3>
+
+        <div class="card-body">
+          <h4 class="card-title">
+            <a
+              :href="shortUrl"
+              class="text-white"
+              target="_blank">{{ shortUrl }}</a>
+          </h4>
+          <p class="card-text">這是你的超潮短網址 🔥</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
 
 <script>
+import links from '@/api/links';
+
 export default {
   name: 'Index',
   data() {
     return {
-      link: {
-        originalUrl: '',
-        customizedPath: '',
-      },
+      link: {},
+      shortUrl: '',
+
+      submitted: false,
+      loading: false,
     };
   },
   methods: {
     getShortUrl() {
-      console.log(this.link);
+      const { link } = this;
+      this.loading = true;
+
+      links
+        .add(link)
+        .then((res) => {
+          const { data } = res;
+          this.shortUrl = data.shortUrl;
+
+          this.link = {};
+          this.loading = false;
+          this.submitted = true;
+        })
+        .catch((err) => {
+          console.error(err);
+          this.loading = false;
+        });
     },
   },
 };
@@ -78,6 +124,10 @@ export default {
     #e2e2e2,
     #c9d6ff
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+button:focus {
+  outline: none;
 }
 </style>
 
