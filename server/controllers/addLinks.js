@@ -4,21 +4,16 @@ module.exports = (req, res) => {
   const { body } = req;
   const { error } = validate(body);
 
-  if (error) {
-    return res
-      .status(400)
-      .send(error.details[0].message);
-  }
+  if (error) return res.status(400).send(error.details[0].message);
 
   const { customizedPath } = body;
-
   Link
     .find({
       customizedPath,
     })
     .countDocuments()
     .then((num) => {
-      if (num) return res.status(400).send('客製化路徑重複了 🤔');
+      if (num) return res.status(400).send('customized path is repeated');
 
       const link = new Link(body);
       return link.save();
@@ -26,7 +21,7 @@ module.exports = (req, res) => {
     .then((link) => {
       const linkObj = link.toObject();
       linkObj.shortUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}/${customizedPath}`;
-      res.status(200).send(linkObj);
+      res.status(200).json(linkObj);
     })
     .catch(({ errors }) => {
       const err = Object
