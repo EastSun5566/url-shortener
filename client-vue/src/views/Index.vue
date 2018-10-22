@@ -64,7 +64,7 @@
               class="text-white"
               target="_blank">{{ shortUrl }}</a>
           </h4>
-          <p class="card-text">這是你的 chill 短網址 🔥</p>
+          <p class="card-text">這是你的超 chill 短網址 🔥</p>
         </div>
       </div>
 
