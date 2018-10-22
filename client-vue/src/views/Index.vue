@@ -142,6 +142,10 @@ export default {
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+.card-title {
+  text-transform: none;
+}
+
 .btn-submit {
   @media (max-width: 992px) {
     width: 100%;
