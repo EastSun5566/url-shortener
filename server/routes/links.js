@@ -5,7 +5,7 @@ const redirectLink = require('../controllers/redirectLink');
 
 const router = express.Router();
 
-router.post('/links', addLinks);
-router.get('/links/:customizedPath', redirectLink);
+router.post('/api/links', addLinks);
+router.get('/:customizedPath', redirectLink);
 
 module.exports = router;

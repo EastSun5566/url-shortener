@@ -6,6 +6,7 @@ module.exports = (req, res) => {
 
   if (error) return res.status(400).send(error.details[0].message);
 
+  body.customizedPath = `💩💩💩${body.customizedPath}💩💩💩`;
   const { customizedPath } = body;
   Link
     .find({
@@ -20,7 +21,7 @@ module.exports = (req, res) => {
     })
     .then((link) => {
       const linkObj = link.toObject();
-      linkObj.shortUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}/${customizedPath}`;
+      linkObj.shortUrl = `${req.protocol}://${req.get('host')}/${customizedPath}`;
       res.status(200).json(linkObj);
     })
     .catch(({ errors }) => {
