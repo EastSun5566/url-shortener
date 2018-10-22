@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Nav from '@/components/Nav';
+import Nav from '@/components/Nav.vue';
 
 export default {
   name: 'App',
@@ -15,5 +15,6 @@ export default {
 </script>
 
 
-<style lang="scss">
+<style lang="scss" scoped>
+@import "~@/assets/styles/index";
 </style>

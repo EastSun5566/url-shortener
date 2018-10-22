@@ -1,13 +1,13 @@
 <template>
   <div class="jumbotron">
     <div class="container">
-      <h1 class="display-3">東陽 a 煞氣短網址 🔥</h1>
-      <p class="lead">保證很短 der，馬上來體驗 👇</p>
+      <h1 class="display-3">最 Chill der 短網址 🔥</h1>
+      <p class="lead">保證很短 der，馬上來 chill ㄧ波 👇</p>
 
       <hr class="my-4">
 
       <form
-        v-if="!submitted"
+        v-if="!isSubmitted"
         class="lead"
         @submit.prevent="getShortUrl">
 
@@ -31,17 +31,20 @@
           <input
             id="inputLarge"
             v-model="link.customizedPath"
-            class="form-control form-control-lg"
+            :class="['form-control', 'form-control-lg', { 'is-invalid': !!errorMessage }]"
             type="text"
             placeholder="例如： chill-out"
             required>
+          <div
+            v-if="errorMessage"
+            class="invalid-feedback">{{ errorMessage }}</div>
         </div>
 
         <div class="text-right">
           <button
-            :disabled="loading"
+            :disabled="isLoading"
             type="submit"
-            class="btn btn-primary btn-lg">GOGO 🚀</button>
+            class="btn btn-primary btn-lg btn-submit">Chill 🚀</button>
         </div>
       </form>
 
@@ -51,7 +54,7 @@
         <button
           type="button"
           class="close text-white text-right mr-2"
-          @click="submitted = false">&times;</button>
+          @click="isSubmitted = false">&times;</button>
         <h3 class="card-header display-4">恭喜 🎉</h3>
 
         <div class="card-body">
@@ -61,7 +64,7 @@
               class="text-white"
               target="_blank">{{ shortUrl }}</a>
           </h4>
-          <p class="card-text">這是你的超潮短網址 🔥</p>
+          <p class="card-text">這是你的 chill 短網址 🔥</p>
         </div>
       </div>
 
@@ -79,14 +82,18 @@ export default {
       link: {},
       shortUrl: '',
 
-      submitted: false,
-      loading: false,
+      isSubmitted: false,
+      isLoading: false,
+      errorMessage: '',
     };
   },
   methods: {
     getShortUrl() {
       const { link } = this;
-      this.loading = true;
+      const { customizedPath } = link;
+      this.isLoading = true;
+
+      link.customizedPath = this.parsePath(customizedPath);
 
       links
         .add(link)
@@ -95,13 +102,22 @@ export default {
           this.shortUrl = data.shortUrl;
 
           this.link = {};
-          this.loading = false;
-          this.submitted = true;
+          this.errorMessage = '';
+          this.isSubmitted = true;
+          this.isLoading = false;
         })
         .catch((err) => {
-          console.error(err);
-          this.loading = false;
+          const { data } = err.response;
+          console.error(data);
+
+          this.errorMessage = data;
+          this.isLoading = false;
         });
+    },
+    parsePath(path) {
+      return [...path]
+        .map(char => ((char === '/' || char === '?') ? '-' : char))
+        .join('');
     },
   },
 };
@@ -126,8 +142,10 @@ export default {
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-button:focus {
-  outline: none;
+.btn-submit {
+  @media (max-width: 992px) {
+    width: 100%;
+  }
 }
 </style>
 
