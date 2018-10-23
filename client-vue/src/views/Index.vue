@@ -1,72 +1,78 @@
 <template>
   <div class="jumbotron">
     <div class="container">
-      <h1 class="display-3">最 Chill der 短網址 🔥</h1>
-      <p class="lead">保證很短 der，馬上來 chill ㄧ波 👇</p>
+      <h1 class="display-3 animated fadeInDown">最 Chill der 短網址 🔥</h1>
+      <p class="lead animated fadeIn">保證很短 der，馬上來 chill ㄧ波 👇</p>
 
       <hr class="my-4">
 
-      <form
-        v-if="!isSubmitted"
-        class="lead"
-        @submit.prevent="getShortUrl">
+      <transition
+        enter-active-class="animated jackInTheBox"
+        leave-active-class="animated zoomOut"
+        mode="out-in">
 
-        <div class="form-group">
-          <label
-            class="col-form-label col-form-label-lg"
-            for="inputLarge">🔥 想要縮 der 網址</label>
-          <input
-            id="inputLarge"
-            v-model="link.originalUrl"
-            class="form-control form-control-lg"
-            type="url"
-            placeholder="例如： https://github.com/EastSun5566"
-            required>
-        </div>
+        <form
+          v-if="!isSubmitted"
+          class="lead animated jackInTheBox"
+          @submit.prevent="getShortUrl">
 
-        <div class="form-group">
-          <label
-            class="col-form-label col-form-label-lg"
-            for="inputLarge">🔥 想要客製化 der 路徑</label>
-          <input
-            id="inputLarge"
-            v-model="link.customizedPath"
-            :class="['form-control', 'form-control-lg', { 'is-invalid': !!errorMessage }]"
-            type="text"
-            placeholder="例如： chill-out"
-            required>
-          <div
-            v-if="errorMessage"
-            class="invalid-feedback">{{ errorMessage }}</div>
-        </div>
+          <div class="form-group">
+            <label
+              class="col-form-label col-form-label-lg"
+              for="inputLarge">🔥 想要縮 der 網址</label>
+            <input
+              id="inputLarge"
+              v-model="link.originalUrl"
+              class="form-control form-control-lg"
+              type="url"
+              placeholder="例如： https://github.com/EastSun5566"
+              required>
+          </div>
 
-        <div class="text-right">
+          <div class="form-group">
+            <label
+              class="col-form-label col-form-label-lg"
+              for="inputLarge">🔥 想要客製化 der 路徑</label>
+            <input
+              id="inputLarge"
+              v-model="link.customizedPath"
+              :class="['form-control', 'form-control-lg', { 'is-invalid': !!errorMessage }]"
+              type="text"
+              placeholder="例如： chill-out"
+              required>
+            <div
+              v-if="errorMessage"
+              class="invalid-feedback">{{ errorMessage }}</div>
+          </div>
+
+          <div class="text-right">
+            <button
+              :disabled="isLoading"
+              type="submit"
+              class="btn btn-primary btn-lg btn-submit">Chill 🚀</button>
+          </div>
+        </form>
+
+        <div
+          v-else
+          class="card text-white bg-primary">
           <button
-            :disabled="isLoading"
-            type="submit"
-            class="btn btn-primary btn-lg btn-submit">Chill 🚀</button>
-        </div>
-      </form>
+            type="button"
+            class="close text-white text-right mr-2"
+            @click="isSubmitted = false">&times;</button>
+          <h3 class="card-header display-4 text-center">恭喜 🎉</h3>
 
-      <div
-        v-else
-        class="card text-white bg-primary">
-        <button
-          type="button"
-          class="close text-white text-right mr-2"
-          @click="isSubmitted = false">&times;</button>
-        <h3 class="card-header display-4">恭喜 🎉</h3>
-
-        <div class="card-body">
-          <h4 class="card-title">
-            <a
-              :href="shortUrl"
-              class="text-white"
-              target="_blank">{{ shortUrl }}</a>
-          </h4>
-          <p class="card-text">這是你的超 chill 短網址 🔥</p>
+          <div class="card-body">
+            <h4 class="card-title">
+              <a
+                :href="shortUrl"
+                class="text-white"
+                target="_blank">{{ shortUrl }}</a>
+            </h4>
+            <p class="card-text text-center">這是你的超 chill 短網址 👆</p>
+          </div>
         </div>
-      </div>
+      </transition>
 
     </div>
   </div>
@@ -144,6 +150,7 @@ export default {
 
 .card-title {
   text-transform: none;
+  text-align: center;
 }
 
 .btn-submit {

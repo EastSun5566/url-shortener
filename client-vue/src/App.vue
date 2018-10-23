@@ -16,5 +16,6 @@ export default {
 
 
 <style lang="scss" scoped>
+@import "~animate.css/animate.min.css";
 @import "~@/assets/styles/index";
 </style>

@@ -19,20 +19,12 @@
       id="navbarColor01"
       class="collapse navbar-collapse">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a
-            class="nav-link"
-            href="https://github.com/EastSun5566"
-            target="_blank">
-            <i class="fab fa-github"/>
-          </a>
-        </li>
         <li class="nav-item">
           <a
             class="nav-link"
-            href="https://codepen.io/EastSun5566/"
+            href="https://github.com/EastSun5566/url-shortener"
             target="_blank">
-            <i class="fab fa-codepen"/>
+            <i class="fab fa-github"/>
           </a>
         </li>
       </ul>
