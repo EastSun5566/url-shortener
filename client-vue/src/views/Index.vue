@@ -1,7 +1,7 @@
 <template>
   <div class="jumbotron">
     <div class="container">
-      <h1 class="display-3 animated fadeInDown">最 Chill der 短網址 🔥</h1>
+      <h1 class="title display-3 animated fadeInDown">最 Chill der 短網址 🔥</h1>
       <p class="lead animated fadeIn">保證很短 der，馬上來 chill ㄧ波 👇</p>
 
       <hr class="my-4">
@@ -49,7 +49,9 @@
             <button
               :disabled="isLoading"
               type="submit"
-              class="btn btn-primary btn-lg btn-submit">Chill 🚀</button>
+              class="btn btn-primary btn-lg btn-submit">
+              Chill <span :class="{ spin: isLoading }">🚀</span>
+            </button>
           </div>
         </form>
 
@@ -148,6 +150,12 @@ export default {
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+.title {
+  @media (max-width: 992px) {
+    font-size: 54px;
+  }
+}
+
 .card-title {
   text-transform: none;
   text-align: center;
@@ -156,6 +164,20 @@ export default {
 .btn-submit {
   @media (max-width: 992px) {
     width: 100%;
+  }
+
+  .spin {
+    display: inline-block;
+    animation: spin 2s linear infinite both;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 </style>
