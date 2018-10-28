@@ -1,8 +1,8 @@
-const { Link, validate } = require('../models/Link');
+const Link = require('../models/Link');
 
 module.exports = (req, res) => {
   const { body } = req;
-  const { error } = validate(body);
+  const { error } = Link.validate(body);
 
   if (error) return res.status(400).send(error.details[0].message);
 

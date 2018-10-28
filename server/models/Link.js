@@ -1,7 +1,24 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
 
-const validate = (link) => {
+const linkSchema = new mongoose.Schema({
+  originalUrl: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  customizedPath: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+linkSchema.statics.validate = (link) => {
   const schema = Joi.object().keys({
     originalUrl: Joi
       .string()
@@ -17,22 +34,6 @@ const validate = (link) => {
   return Joi.validate(link, schema);
 };
 
-const Link = mongoose.model('Link', new mongoose.Schema({
-  originalUrl: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  customizedPath: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-}));
+const Link = mongoose.model('Link', linkSchema);
 
-exports.Link = Link;
-exports.validate = validate;
+module.exports = Link;

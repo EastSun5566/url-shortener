@@ -1,4 +1,4 @@
-const { Link } = require('../models/Link');
+const Link = require('../models/Link');
 
 module.exports = (req, res) => {
   const { customizedPath } = req.params;

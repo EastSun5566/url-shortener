@@ -7,6 +7,7 @@ require('dotenv').config();
 
 require('./db/connect');
 const linksRouter = require('./routes/links');
+const IndexRouter = require('./routes');
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/', linksRouter);
+app.use('/', IndexRouter);
+app.use('/api/links', linksRouter);
 
 module.exports = app;
