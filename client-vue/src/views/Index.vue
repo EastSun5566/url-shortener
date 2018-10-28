@@ -26,6 +26,7 @@
               class="form-control form-control-lg"
               type="url"
               placeholder="例如： https://github.com/EastSun5566"
+              autofocus
               required>
           </div>
 
