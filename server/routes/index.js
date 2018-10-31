@@ -1,7 +1,5 @@
-const express = require('express');
+const router = require('express').Router();
 const redirectLink = require('../controllers/redirectLink');
-
-const router = express.Router();
 
 router.get('/:customizedPath', redirectLink);
 

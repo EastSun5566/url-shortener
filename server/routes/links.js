@@ -1,7 +1,5 @@
-const express = require('express');
+const router = require('express').Router();
 const addLinks = require('../controllers/addLinks');
-
-const router = express.Router();
 
 router.post('/', addLinks);
 

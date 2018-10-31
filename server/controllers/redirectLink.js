@@ -8,5 +8,8 @@ module.exports = (req, res) => {
       customizedPath,
     })
     .then(({ originalUrl }) => res.redirect(originalUrl))
-    .catch(() => res.sendStatus(404));
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(404);
+    });
 };
