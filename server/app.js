@@ -5,7 +5,7 @@ const logger = require('morgan');
 
 require('dotenv').config();
 
-require('./db/connect');
+require('./db');
 const linksRouter = require('./routes/links');
 const IndexRouter = require('./routes');
 
@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/', IndexRouter);
 app.use('/api/links', linksRouter);
+app.use(IndexRouter);
 
 module.exports = app;
