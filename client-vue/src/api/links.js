@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const request = axios.create({
-  baseURL: 'https://chill.now.sh/api',
+  baseURL: process.env.VUE_APP_API_URL,
 });
 
 export default {
