@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const addLinks = require('../controllers/addLinks');
+const addLinks = require('../controllers/links/addLinks');
 
 router.post('/', addLinks);
 
