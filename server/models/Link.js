@@ -34,6 +34,4 @@ linkSchema.statics.validate = (link) => {
   return Joi.validate(link, schema);
 };
 
-const Link = mongoose.model('Link', linkSchema);
-
-module.exports = Link;
+module.exports = mongoose.model('Link', linkSchema);
