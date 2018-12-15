@@ -5,15 +5,15 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const linksRouter = require('./routes/links');
-const IndexRouter = require('./routes');
-const { notFound, errorHandler } = require('./middlewares/error');
-
 // 環境變數
 require('dotenv').config();
 
 // 資料庫
 require('./db');
+
+const IndexRouter = require('./routes');
+const linksRouter = require('./routes/links');
+const { notFound, errorHandler } = require('./middlewares/error');
 
 const app = express();
 
@@ -27,8 +27,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // 路由
-app.use('/api/links', linksRouter);
 app.use(IndexRouter);
+app.use('/api/links', linksRouter);
 
 app.use(notFound);
 app.use(errorHandler);

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "NODE_ENV=production node ./node_modules/.bin/pm2-runtime ./bin/www -i max",
+    "start": "NODE_ENV=production ./node_modules/.bin/pm2-runtime ./bin/www -i max",
     "dev": "DEBUG=dev nodemon ./bin/www",
     "debug": "DEBUG=dev node --inspect ./bin/www",
     "lint": "eslint --fix --ignore-path .gitignore ."
