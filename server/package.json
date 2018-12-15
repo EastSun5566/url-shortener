@@ -8,11 +8,6 @@
     "debug": "DEBUG=dev node --inspect ./bin/www",
     "lint": "eslint --fix --ignore-path .gitignore ."
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint"
-    }
-  },
   "dependencies": {
     "compression": "^1.7.3",
     "cookie-parser": "~1.4.3",
