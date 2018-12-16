@@ -2,7 +2,9 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
     <router-link
       class="navbar-brand"
-      to="/">ㄏㄏ</router-link>
+      to="/">
+      Chill Shortener
+    </router-link>
 
     <button
       class="navbar-toggler"
@@ -24,8 +26,17 @@
             class="nav-link"
             href="https://github.com/EastSun5566/url-shortener"
             target="_blank">
-            <i class="fab fa-github"/>
+            <i class="fab fa-github" />
           </a>
+        </li>
+
+        <li class="nav-item">
+          <router-link
+            class="nav-link"
+            to="/login">
+            <i class="fas fa-sign-in-alt" />
+            登入個
+          </router-link>
         </li>
       </ul>
     </div>

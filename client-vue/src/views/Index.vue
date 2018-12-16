@@ -6,82 +6,64 @@
 
       <hr class="my-4">
 
-      <transition
-        enter-active-class="animated jackInTheBox"
-        leave-active-class="animated zoomOut"
-        mode="out-in">
+      <form
+        class="lead animated jackInTheBox"
+        @submit.prevent="getShortUrl">
 
-        <form
-          v-if="!isSubmitted"
-          class="lead animated jackInTheBox"
-          @submit.prevent="getShortUrl">
+        <div class="form-group">
+          <label
+            class="col-form-label col-form-label-lg"
+            for="inputLarge">🔥 想要縮 der 網址</label>
+          <input
+            id="inputLarge"
+            v-model="link.originalUrl"
+            class="form-control form-control-lg"
+            type="url"
+            placeholder="例如： https://github.com/EastSun5566"
+            autofocus
+            required>
+        </div>
 
-          <div class="form-group">
-            <label
-              class="col-form-label col-form-label-lg"
-              for="inputLarge">🔥 想要縮 der 網址</label>
-            <input
-              id="inputLarge"
-              v-model="link.originalUrl"
-              class="form-control form-control-lg"
-              type="url"
-              placeholder="例如： https://github.com/EastSun5566"
-              autofocus
-              required>
-          </div>
-
-          <div class="form-group">
-            <label
-              class="col-form-label col-form-label-lg"
-              for="inputLarge">🔥 想要客製化 der 路徑</label>
-            <input
-              id="inputLarge"
-              v-model="link.customizedPath"
-              :class="['form-control', 'form-control-lg', { 'is-invalid': !!errorMessage }]"
-              type="text"
-              placeholder="例如： chill-out"
-              required>
-            <div
-              v-if="errorMessage"
-              class="invalid-feedback">{{ errorMessage }}</div>
-          </div>
-
-          <div class="text-right">
-            <button
-              :disabled="isLoading"
-              type="submit"
-              class="btn btn-primary btn-lg btn-submit">
-              Chill <span :class="{ spin: isLoading }">🚀</span>
-            </button>
-          </div>
-        </form>
+        <div class="form-group">
+          <label
+            class="col-form-label col-form-label-lg"
+            for="inputLarge">🔥 想要客製化 der 路徑</label>
+          <input
+            id="inputLarge"
+            v-model="link.customizedPath"
+            :class="['form-control', 'form-control-lg', { 'is-invalid': !!errorMessage }]"
+            type="text"
+            placeholder="例如： chill-out"
+            required>
+        </div>
 
         <div
-          v-else
-          class="card text-white bg-primary">
+          v-if="errorMessage"
+          class="alert alert-dismissible alert-danger">
           <button
             type="button"
-            class="close text-white text-right mr-2"
-            @click="isSubmitted = false">&times;</button>
-          <h3 class="card-header display-4 text-center">恭喜 🎉</h3>
-
-          <div class="card-body">
-            <h4 class="card-title">
-              <a
-                :href="shortUrl"
-                class="text-white"
-                target="_blank">{{ shortUrl }}</a>
-            </h4>
-            <p class="card-text text-center">這是你的超 chill 短網址 👆</p>
-          </div>
+            class="close"
+            data-dismiss="alert">&times;</button>
+          {{ errorMessage }}
         </div>
-      </transition>
+
+        <div class="text-right">
+          <button
+            :disabled="isLoading"
+            type="submit"
+            class="btn btn-primary btn-lg btn-submit">
+            Chill <span :class="{ spin: isLoading }">🚀</span>
+          </button>
+        </div>
+      </form>
 
     </div>
   </div>
 </template>
 
 <script>
+import slug from 'slug';
+
 import links from '@/api/links';
 
 export default {
@@ -89,9 +71,7 @@ export default {
   data() {
     return {
       link: {},
-      shortUrl: '',
 
-      isSubmitted: false,
       isLoading: false,
       errorMessage: '',
     };
@@ -102,31 +82,26 @@ export default {
       const { customizedPath } = link;
       this.isLoading = true;
 
-      link.customizedPath = this.parsePath(customizedPath);
+      link.customizedPath = slug(customizedPath);
 
       links
         .add(link)
         .then((res) => {
           const { data } = res;
-          this.shortUrl = data.shortUrl;
-
-          this.link = {};
-          this.errorMessage = '';
-          this.isSubmitted = true;
           this.isLoading = false;
+
+          this.$router.push({
+            path: '/urls',
+            query: { url: data.shortUrl },
+          });
         })
         .catch((err) => {
           const { data } = err.response;
           console.error(data);
 
-          this.errorMessage = data;
+          this.errorMessage = data.message;
           this.isLoading = false;
         });
-    },
-    parsePath(path) {
-      return [...path]
-        .map(char => ((char === '/' || char === '?') ? '-' : char))
-        .join('');
     },
   },
 };
@@ -134,32 +109,15 @@ export default {
 
 <style lang="scss" scoped>
 .jumbotron {
+  padding-top: 20vh;
   min-height: 100vh;
-  margin-bottom: 0;
-  padding-top: 160px;
-
-  background: #c9d6ff; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #e2e2e2,
-    #c9d6ff
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #e2e2e2,
-    #c9d6ff
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-color: transparent;
 }
 
 .title {
   @media (max-width: 992px) {
     font-size: 54px;
   }
-}
-
-.card-title {
-  text-transform: none;
-  text-align: center;
 }
 
 .btn-submit {
