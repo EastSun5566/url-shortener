@@ -1,4 +1,3 @@
-const slug = require('slug');
 const getSomeCoolEmojis = require('get-some-cool-emojis');
 const Link = require('../../models/Link');
 
@@ -14,7 +13,7 @@ module.exports = (req, res, next) => {
   }
 
   // 隨機產生 Emoji 加至客製化路徑 🔥🚀👌
-  body.customizedPath = `${getSomeCoolEmojis(5)}|${slug(body.customizedPath)}|${getSomeCoolEmojis(5)}`;
+  body.customizedPath = encodeURIComponent(`${getSomeCoolEmojis(50)}${body.customizedPath}${getSomeCoolEmojis(50)}`);
   const { customizedPath } = body;
 
   // 先查詢客製化路徑是否被用過
@@ -32,7 +31,7 @@ module.exports = (req, res, next) => {
         .save()
         .then((link) => { // 新增連結
           const linkObj = link.toObject();
-          linkObj.shortUrl = `${req.protocol}://${req.get('host')}/${customizedPath}`;
+          linkObj.shortUrl = `${req.protocol}://${req.get('host')}/${decodeURIComponent(customizedPath)}`;
 
           res
             .status(200)

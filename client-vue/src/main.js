@@ -1,6 +1,7 @@
 import Vue from 'vue';
 
-import './assets/styles/index.scss';
+import 'animate.css';
+import '@/assets/styles/index.scss';
 
 import App from './App.vue';
 import router from './router';

@@ -3,7 +3,7 @@
     <router-link
       class="navbar-brand"
       to="/">
-      Chill Shortener
+      Chill ✨
     </router-link>
 
     <button

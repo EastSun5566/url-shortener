@@ -5,7 +5,9 @@ module.exports = (req, res, next) => {
 
   // 先查詢連結
   Link
-    .findOne({ customizedPath })
+    .findOne({
+      customizedPath: encodeURIComponent(customizedPath),
+    })
     .then((doc) => {
       if (!doc) { // 若找不到
         const err = new Error('Not Found');

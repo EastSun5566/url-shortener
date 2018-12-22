@@ -1,8 +1,10 @@
 <template>
   <div class="jumbotron">
     <div class="container">
-      <h1 class="title display-3 animated fadeInDown">最 Chill der 短網址 🔥</h1>
-      <p class="lead animated fadeIn">保證很短 der，馬上來 chill ㄧ波 👇</p>
+      <h1 class="title display-3 animated fadeInDown">
+        <span class="title-content" />
+      </h1>
+      <p class="lead animated fadeIn">保證很長 der，馬上來 chill ㄧ波 👇</p>
 
       <hr class="my-4">
 
@@ -13,7 +15,7 @@
         <div class="form-group">
           <label
             class="col-form-label col-form-label-lg"
-            for="inputLarge">🔥 想要縮 der 網址</label>
+            for="inputLarge">🔥 想要拉 der 網址</label>
           <input
             id="inputLarge"
             v-model="link.originalUrl"
@@ -62,7 +64,7 @@
 </template>
 
 <script>
-import slug from 'slug';
+import Typed from 'typed.js';
 
 import links from '@/api/links';
 
@@ -76,13 +78,20 @@ export default {
       errorMessage: '',
     };
   },
+  mounted() {
+    new Typed('.title-content', {
+      strings: [
+        '最 Chill der 短網址 ✨',
+        '最 Chill der 抱歉，我是說',
+        '最 Chill der 長網址 🔥'],
+      typeSpeed: 100,
+      startDelay: 800,
+    });
+  },
   methods: {
     getShortUrl() {
       const { link } = this;
-      const { customizedPath } = link;
       this.isLoading = true;
-
-      link.customizedPath = slug(customizedPath);
 
       links
         .add(link)
