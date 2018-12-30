@@ -8,5 +8,5 @@
 
 ## Stack
 
-前端： `Vue.js + Bootstrap`
-後端： `Express.js + MongoDB`
+- 前端： `Vue.js + Bootstrap`
+- 後端： `Express.js + MongoDB`
