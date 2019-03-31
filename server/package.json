@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "start": "NODE_ENV=production ./node_modules/.bin/pm2-runtime ./bin/www -i max",
-    "dev": "DEBUG=dev nodemon ./bin/www",
-    "debug": "DEBUG=dev node --inspect ./bin/www",
+    "dev": "NODE_ENV=development DEBUG=dev nodemon ./bin/www",
+    "debug": "NODE_ENV=development DEBUG=dev node --inspect ./bin/www",
+    "db": "brew services start mongodb-community@4.0",
     "lint": "eslint --fix --ignore-path .gitignore ."
   },
   "dependencies": {

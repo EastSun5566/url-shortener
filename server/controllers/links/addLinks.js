@@ -9,7 +9,9 @@ module.exports = (req, res, next) => {
   if (error) {
     const err = new Error(error.details[0].message);
     err.status = 400;
-    return next(err);
+
+    next(err);
+    return;
   }
 
   // 隨機產生 Emoji 加至客製化路徑 🔥🚀👌
@@ -23,7 +25,9 @@ module.exports = (req, res, next) => {
       if (doc) { // 若被用過
         const err = new Error('這路徑有人用了 😢');
         err.status = 400;
-        return next(err);
+
+        next(err);
+        return;
       }
 
       const link = new Link(body);
