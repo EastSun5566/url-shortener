@@ -1,0 +1,24 @@
+{
+  "name": "chill",
+  "version": "1.0.0",
+  "description": "A url shortener For chill",
+  "scripts": {
+    "dev:client": "cd client && yarn dev",
+    "dev:sever": "cd server && yarn dev",
+    "dev": "run-p dev:sever dev:client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EastSun5566/url-shortener.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EastSun5566/url-shortener/issues"
+  },
+  "homepage": "https://github.com/EastSun5566/url-shortener#readme",
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}
