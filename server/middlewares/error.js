@@ -1,5 +1,5 @@
-// 找不到路由處理
-exports.notFound = (req, res, next) => {
+// 404 路由處理
+exports.notFoundHandler = (req, res, next) => {
   const err = new Error('Not Found');
   err.status = 404;
 
@@ -14,6 +14,7 @@ exports.errorHandler = (err, req, res, next) => {
     .status(status || 500)
     .json({
       message,
+      status,
       stack,
     });
 };

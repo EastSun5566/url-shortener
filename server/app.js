@@ -9,15 +9,16 @@ const logger = require('morgan');
 require('dotenv').config({ path: `./env/.env.${process.env.NODE_ENV}` });
 
 // 資料庫
-require('./db');
+require('./db/mongoDb');
 
 const IndexRouter = require('./routes');
 const linksRouter = require('./routes/links');
-const { notFound, errorHandler } = require('./middlewares/error');
+const usersRouter = require('./routes/users');
+const { notFoundHandler, errorHandler } = require('./middlewares/error');
 
 const app = express();
 
-// 中介體
+// 中間件
 app.use(cors());
 app.use(compression());
 app.use(helmet());
@@ -28,10 +29,10 @@ app.use(cookieParser());
 
 // 路由
 app.use(IndexRouter);
-app.use('/api/links', linksRouter);
+app.use('/v1/links', linksRouter);
+app.use('/v1/users', usersRouter);
 
-app.use(notFound);
+app.use(notFoundHandler);
 app.use(errorHandler);
-
 
 module.exports = app;
