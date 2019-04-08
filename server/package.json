@@ -10,6 +10,7 @@
     "lint": "eslint --fix --ignore-path .gitignore ."
   },
   "dependencies": {
+    "boom": "^7.3.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.4",
