@@ -8,13 +8,14 @@ exports.notFoundHandler = (req, res, next) => {
 
 // 統一錯誤處理
 exports.errorHandler = (err, req, res, next) => {
-  const { status, message, stack } = err;
+  const { stack, output } = err;
+  const { statusCode, message } = output.payload;
 
   res
-    .status(status || 500)
+    .status(statusCode || 500)
     .json({
       message,
-      status,
-      stack,
+      statusCode,
+      stack: process.env.NODE_ENV === 'production' ? undefined : stack,
     });
 };

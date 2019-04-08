@@ -1,3 +1,5 @@
+const Boom = require('boom');
+
 const User = require('../../models/User');
 
 module.exports = async (req, res, next) => {
@@ -5,24 +7,12 @@ module.exports = async (req, res, next) => {
 
   // 驗證請求
   const { error } = User.validate(body);
-  if (error) {
-    const err = new Error(error.details[0].message);
-    err.status = 400;
-
-    next(err);
-    return;
-  }
+  if (error) return next(Boom.badRequest(error.details[0].message));
 
   // 先查詢信箱是否被註冊過
   const { email } = body;
   const doc = await User.findOne({ email });
-  if (doc) {
-    const err = new Error('這信箱已被註冊 😢');
-    err.status = 400;
-
-    next(err);
-    return;
-  }
+  if (doc) return next(Boom.badRequest('這信箱已被註冊 😢'));
 
   // 新增使用者
   const user = new User(body);
@@ -33,9 +23,7 @@ module.exports = async (req, res, next) => {
       .values(errors)
       .map(err => err.message);
 
-    const err = new Error(errorMassage);
-    next(err);
-    return;
+    return next(Boom.internal(errorMassage));
   }
 
   res
