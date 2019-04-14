@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const createLink = require('../controllers/links/createLink');
 
-router.post('/', createLink);
+const parseJwt = require('../middlewares/auth');
+
+router.post('/', parseJwt, createLink);
 
 module.exports = router;

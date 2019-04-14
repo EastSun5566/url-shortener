@@ -2,7 +2,7 @@ const Boom = require('boom');
 const bcrypt = require('bcrypt');
 
 const User = require('../../models/User');
-const createJwt = require('../../services/createJwt');
+const { createJwt } = require('../../services/jwt');
 
 module.exports = async (req, res, next) => {
   const { email, password } = req.body;
