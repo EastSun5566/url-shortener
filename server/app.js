@@ -12,13 +12,12 @@ require('dotenv').config({ path: `./env/.env.${process.env.NODE_ENV}` });
 require('./db/mongoDb');
 
 const rateLimit = require('./middlewares/rateLimit');
+const notFound = require('./middlewares/notFound');
+const errorHandler = require('./middlewares/errorHandler');
 
 const IndexRouter = require('./routes');
 const linksRouter = require('./routes/links');
 const usersRouter = require('./routes/users');
-
-const notFound = require('./middlewares/notFound');
-const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
 

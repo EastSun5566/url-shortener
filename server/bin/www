@@ -86,5 +86,5 @@ function onListening() {
   const bind = typeof addr === 'string'
     ? `pipe ${addr}`
     : `port ${addr.port}`;
-  log(`Listening on ${bind}`);
+  log(`Server listening on ${bind}`);
 }

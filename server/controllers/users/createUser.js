@@ -14,7 +14,7 @@ module.exports = async (req, res, next) => {
   const doc = await User.findOne({ email });
   if (doc) return next(Boom.badRequest('這信箱已被註冊 😢'));
 
-  // 新增使用者
+  // DB 新增使用者
   const user = new User(body);
   try {
     await user.save();
