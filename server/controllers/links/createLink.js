@@ -4,23 +4,23 @@ const getSomeCoolEmojis = require('get-some-cool-emojis');
 const Link = require('../../models/Link');
 
 module.exports = async (req, res, next) => {
-  const { body } = req;
+  const { originalUrl, customizedPath } = req.body;
 
   // 驗證請求
-  const { error } = Link.validate(body);
+  const { error } = Link.validate({ originalUrl, customizedPath });
   if (error) return next(Boom.badRequest(error.details[0].message));
 
   // Emoji 化客製化路徑 🔥🚀👌
-  const customizedPath = encodeURIComponent(`${getSomeCoolEmojis(50)}${body.customizedPath}${getSomeCoolEmojis(50)}`);
+  const customizedPathWithEmoji = encodeURIComponent(`${getSomeCoolEmojis(50)}${customizedPath}${getSomeCoolEmojis(50)}`);
 
   // 先查詢客製化路徑是否被用過
-  const doc = await Link.findOne({ customizedPath });
-  if (doc) return next(Boom.badRequest('這路徑有人用了 😢'));
+  const link = await Link.findOne({ customizedPath: customizedPathWithEmoji });
+  if (link) return next(Boom.badRequest('這路徑有人用了 😢'));
 
   // DB 新增連結
-  const link = new Link({ ...body, customizedPath });
+  const newLink = new Link({ originalUrl, customizedPath: customizedPathWithEmoji });
   try {
-    await link.save();
+    await newLink.save();
   } catch (errors) {
     const errorMassage = Object
       .values(errors)
@@ -32,7 +32,7 @@ module.exports = async (req, res, next) => {
   res
     .status(200)
     .json({
-      ...link,
+      ...newLink,
       shortUrl: `${req.protocol}://${req.get('host')}/${decodeURIComponent(customizedPath)}`,
     });
 };

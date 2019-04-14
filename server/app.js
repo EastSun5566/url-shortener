@@ -18,6 +18,7 @@ const errorHandler = require('./middlewares/errorHandler');
 const IndexRouter = require('./routes');
 const linksRouter = require('./routes/links');
 const usersRouter = require('./routes/users');
+const AuthRouter = require('./routes/auth');
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use(cookieParser());
 app.use(IndexRouter);
 app.use('/v1/links', linksRouter);
 app.use('/v1/users', usersRouter);
+app.use('/v1/auth', AuthRouter);
 
 app.use(notFound);
 app.use(errorHandler);
