@@ -1,7 +1,5 @@
 {
   "name": "server",
-  "version": "0.0.0",
-  "private": true,
   "scripts": {
     "start": "NODE_ENV=production ./node_modules/.bin/pm2-runtime ./bin/www -i max",
     "dev": "yarn db && NODE_ENV=development DEBUG=dev nodemon ./bin/www",
