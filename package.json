@@ -1,7 +1,7 @@
 {
   "name": "chill",
   "version": "1.0.0",
-  "description": "A url shortener For chill",
+  "description": "A chillest url shortener",
   "scripts": {
     "dev:client": "cd client && yarn dev",
     "dev:sever": "cd server && yarn dev",
@@ -11,9 +11,12 @@
     "type": "git",
     "url": "git+https://github.com/EastSun5566/url-shortener.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "url shortener",
+    "chill"
+  ],
+  "author": "汪東陽 EastSun5566",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/EastSun5566/url-shortener/issues"
   },
