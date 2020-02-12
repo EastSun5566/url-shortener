@@ -1,4 +1,4 @@
-module.exports = (err, req, res, next) => {
+module.exports = (err, req, res) => {
   const { stack, output } = err;
   const { statusCode, message, error } = output.payload;
 

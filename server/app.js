@@ -15,7 +15,7 @@ const rateLimit = require('./middlewares/rateLimit');
 const notFound = require('./middlewares/notFound');
 const errorHandler = require('./middlewares/errorHandler');
 
-const IndexRouter = require('./routes');
+const indexRouter = require('./routes');
 const linksRouter = require('./routes/links');
 const usersRouter = require('./routes/users');
 const AuthRouter = require('./routes/auth');
@@ -33,7 +33,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // 路由
-app.use(IndexRouter);
+app.use(indexRouter);
 app.use('/v1/links', linksRouter);
 app.use('/v1/users', usersRouter);
 app.use('/v1/auth', AuthRouter);
