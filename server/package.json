@@ -1,9 +1,11 @@
 {
   "name": "server",
   "scripts": {
-    "start": "NODE_ENV=production ./node_modules/.bin/pm2-runtime ./bin/www -i max",
     "dev": "yarn db && NODE_ENV=development DEBUG=dev nodemon ./bin/www",
     "debug": "yarn db && NODE_ENV=development DEBUG=dev node --inspect ./bin/www",
+    "start": "NODE_ENV=production ./node_modules/.bin/pm2-runtime ./bin/www -i max",
+    "build:docker": "docker build -t url-shortener .",
+    "start:docker": "docker run -p 49160:8080 -d url-shortener",
     "db": "brew services start mongodb-community",
     "lint": "eslint --fix --ignore-path .gitignore ."
   },
