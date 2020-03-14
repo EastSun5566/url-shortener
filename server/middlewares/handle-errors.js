@@ -7,6 +7,6 @@ module.exports = (err, req, res) => {
     .json({
       message: message || error,
       statusCode,
-      stack: process.env.NODE_ENV === 'production' ? undefined : stack,
+      ...(process.env.NODE_ENV === 'production' && { stack }),
     });
 };

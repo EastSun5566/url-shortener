@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const parseJwt = require('../middlewares/parseJwt');
+const parseJwt = require('../middlewares/parse-jwt');
 const auth = require('../middlewares/auth');
 
 const getMe = require('../controllers/users/getMe');
