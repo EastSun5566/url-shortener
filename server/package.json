@@ -5,6 +5,7 @@
     "debug": "yarn db && NODE_ENV=development DEBUG=dev node --inspect ./bin/www",
     "start": "NODE_ENV=production ./node_modules/.bin/pm2-runtime ./bin/www -i max",
     "start:docker": "docker-compose up",
+    "build:image": "docker-compose build",
     "db": "brew services start mongodb-community",
     "lint": "eslint --fix --ignore-path .gitignore ."
   },
