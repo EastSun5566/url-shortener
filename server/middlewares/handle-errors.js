@@ -1,4 +1,4 @@
-module.exports = (err, req, res, next) => {
+module.exports = (err, req, res) => {
   const { stack, output } = err;
   const { statusCode, message, error } = output.payload;
 
@@ -7,6 +7,6 @@ module.exports = (err, req, res, next) => {
     .json({
       message: message || error,
       statusCode,
-      stack: process.env.NODE_ENV === 'production' ? undefined : stack,
+      ...(process.env.NODE_ENV === 'production' && { stack }),
     });
 };

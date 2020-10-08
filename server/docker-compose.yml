@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  url-shortener-server:
+    build: .
+    container_name: url-shortener-server
+    ports:
+      - 80:8080
+
+  # redis:
+  #   image: redis
+
+  db:
+    image: mongo
+    container_name: db
+    volumes:
+      - mongodb:/data/db
+    ports:
+      - 27017:27017
+
+volumes:
+  mongodb:

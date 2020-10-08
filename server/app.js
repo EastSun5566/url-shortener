@@ -11,11 +11,11 @@ require('dotenv').config({ path: `./env/.env.${process.env.NODE_ENV}` });
 // 資料庫
 require('./db/mongoDb');
 
-const rateLimit = require('./middlewares/rateLimit');
-const notFound = require('./middlewares/notFound');
-const errorHandler = require('./middlewares/errorHandler');
+const rateLimit = require('./middlewares/rate-limit');
+const handleNotFound = require('./middlewares/handle-not-found');
+const handleErrors = require('./middlewares/handle-errors');
 
-const IndexRouter = require('./routes');
+const indexRouter = require('./routes');
 const linksRouter = require('./routes/links');
 const usersRouter = require('./routes/users');
 const AuthRouter = require('./routes/auth');
@@ -33,12 +33,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // 路由
-app.use(IndexRouter);
+app.use(indexRouter);
 app.use('/v1/links', linksRouter);
 app.use('/v1/users', usersRouter);
 app.use('/v1/auth', AuthRouter);
 
-app.use(notFound);
-app.use(errorHandler);
+app.use(handleNotFound);
+app.use(handleErrors);
 
 module.exports = app;
