@@ -1,22 +1,23 @@
 version: "3"
 
 services:
-  url-shortener-server:
+  server:
+    image: node
     build: .
-    container_name: url-shortener-server
     ports:
       - 80:8080
+    links:
+      - cache
+      - db
 
-  # redis:
-  #   image: redis
+  cache:
+    image: redis
+    ports:
+      - 6379:6379
 
   db:
     image: mongo
-    container_name: db
     volumes:
       - mongodb:/data/db
     ports:
       - 27017:27017
-
-volumes:
-  mongodb:

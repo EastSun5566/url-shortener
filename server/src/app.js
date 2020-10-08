@@ -9,7 +9,7 @@ const logger = require('morgan');
 require('dotenv').config({ path: `./env/.env.${process.env.NODE_ENV}` });
 
 // 資料庫
-require('./db/mongoDb');
+require('../db/mongoDb');
 
 const rateLimit = require('./middlewares/rate-limit');
 const handleNotFound = require('./middlewares/handle-not-found');

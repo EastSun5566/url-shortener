@@ -1,6 +1,6 @@
 const Boom = require('boom');
 
-const Link = require('../../models/Link');
+const Link = require('../../src/models/Link');
 
 module.exports = async (req, res, next) => {
   const { customizedPath } = req.params; // 拿客製化路徑
