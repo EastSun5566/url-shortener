@@ -5,7 +5,7 @@
 ## Demo 🖥
 
 - Web： <https://chill.now.sh/>
-- API： <https://chill-api.herokuapp.com/>
+- API： <https://chill-shortener-api.herokuapp.com//>
 
 ## Dev 🔧
 
