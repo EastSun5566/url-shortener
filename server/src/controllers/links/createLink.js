@@ -22,6 +22,7 @@ module.exports = async (req, res, next) => {
   const newLink = new Link({
     originalUrl,
     customizedPath: customizedPathWithEmoji,
+    // eslint-disable-next-line no-underscore-dangle
     userId: user._id || null,
   });
   try {

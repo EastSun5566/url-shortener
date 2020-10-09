@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 // 環境變數
-require('dotenv').config({ path: `./env/.env.${process.env.NODE_ENV}` });
+require('dotenv').config({ path: `../env/.env.${process.env.NODE_ENV}` });
 
 // 資料庫
 require('../db/mongoDb');
