@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const { config } = require('dotenv');
 
-const { connectDB } = require('./db/mongo-db');
+const { connectDB } = require('./db/mongodb');
 
 const {
   rateLimit,
@@ -18,7 +18,6 @@ const indexRouter = require('./routes');
 const linksRouter = require('./routes/links');
 const usersRouter = require('./routes/users');
 const AuthRouter = require('./routes/auth');
-
 
 (async () => {
   config({ path: `../env/.env.${process.env.NODE_ENV}` });

@@ -9,15 +9,24 @@ module.exports = async (req, res, next) => {
 
   // 驗證請求
   const { error } = User.validate({ email, password });
-  if (error) return next(Boom.badRequest(error.details[0].message));
+  if (error) {
+    next(Boom.badRequest(error.details[0].message));
+    return;
+  }
 
   // 先查詢是否有此信箱
   const user = await User.findOne({ email });
-  if (!user) return next(Boom.badRequest('無效的信箱或密碼 😢'));
+  if (!user) {
+    next(Boom.badRequest('無效的信箱或密碼 😢'));
+    return;
+  }
 
   // 驗證密碼
   const isValidPassword = await bcrypt.compare(password, user.password);
-  if (!isValidPassword) return next(Boom.badRequest('無效的信箱或密碼 😢'));
+  if (!isValidPassword) {
+    next(Boom.badRequest('無效的信箱或密碼 😢'));
+    return;
+  }
 
   // 產生 JWT
   const { _id, createdAt } = user;

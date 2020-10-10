@@ -1,6 +1,6 @@
 const Boom = require('boom');
 
-module.exports = validate => (req, _res, next) => {
+module.exports = (validate) => (req, _res, next) => {
   const { body } = req;
 
   const { error } = validate(body);
