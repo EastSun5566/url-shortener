@@ -1,5 +1,8 @@
 const Boom = require('boom');
 
-module.exports = (req, res, next) => {
-  if (!req.user._id) return next(Boom.unauthorized('No Token'));
+module.exports = (req, _res, next) => {
+  // eslint-disable-next-line no-underscore-dangle
+  if (!req.user._id) {
+    next(Boom.unauthorized('No Token'));
+  }
 };
