@@ -1,12 +1,10 @@
 const router = require('express').Router();
 
-const parseJwt = require('../middlewares/parse-jwt');
-const auth = require('../middlewares/auth');
+const { parseJwt, auth } = require('../middlewares');
+const { getMe, createUser } = require('../controllers/user');
 
-const getMe = require('../controllers/users/getMe');
-const createUser = require('../controllers/users/createUser');
-
-router.get('/me', parseJwt, auth, getMe);
-router.post('/', createUser);
+router
+  .get('/me', parseJwt, auth, getMe)
+  .post('/', createUser);
 
 module.exports = router;

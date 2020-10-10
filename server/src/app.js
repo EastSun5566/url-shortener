@@ -16,24 +16,24 @@ const {
 
 const router = require('./routers');
 
-(async () => {
-  config({ path: `../env/.env.${process.env.NODE_ENV}` });
+config({ path: `../env/.env.${process.env.NODE_ENV}` });
 
-  await connectDB();
+connectDB();
 
-  const app = express();
+const app = express();
 
-  app.use(rateLimit);
-  app.use(cors());
-  app.use(compression());
-  app.use(helmet());
-  app.use(logger('dev'));
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: false }));
-  app.use(cookieParser());
+app.use(rateLimit);
+app.use(cors());
+app.use(compression());
+app.use(helmet());
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
-  app.use(router);
+app.use(router);
 
-  app.use(handleNotFound);
-  app.use(handleErrors);
-})();
+app.use(handleNotFound);
+app.use(handleErrors);
+
+module.exports = app;

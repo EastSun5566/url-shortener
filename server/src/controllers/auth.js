@@ -1,10 +1,10 @@
 const Boom = require('boom');
 const bcrypt = require('bcrypt');
 
-const User = require('../../models/User');
-const { createJwt } = require('../../services/jwt');
+const User = require('../models/User');
+const { createJwt } = require('../utils');
 
-module.exports = async (req, res, next) => {
+module.exports.login = async (req, res, next) => {
   const { email, password } = req.body;
 
   // 驗證請求

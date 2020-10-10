@@ -1,10 +1,10 @@
 const Boom = require('boom');
 const bcrypt = require('bcrypt');
 
-const User = require('../../models/User');
-const { createJwt } = require('../../services/jwt');
+const User = require('../models/User');
+const { createJwt } = require('../utils');
 
-module.exports = async (req, res, next) => {
+module.exports.createUser = async (req, res, next) => {
   const { email, password } = req.body;
 
   // 驗證請求
@@ -45,4 +45,14 @@ module.exports = async (req, res, next) => {
   res
     .status(200)
     .json({ _id, createdAt });
+};
+
+module.exports.getMe = async (req, res) => {
+  const { _id } = req.user;
+
+  const user = await User.findById(_id);
+
+  res
+    .status(200)
+    .json(user);
 };

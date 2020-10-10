@@ -1,9 +1,9 @@
 const Boom = require('boom');
 const getSomeCoolEmojis = require('get-some-cool-emojis');
 
-const Link = require('../../models/Link');
+const Link = require('../models/Link');
 
-module.exports = async (req, res, next) => {
+module.exports.createLink = async (req, res, next) => {
   const { user, body } = req;
   const { originalUrl, customizedPath } = body;
 
