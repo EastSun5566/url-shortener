@@ -1,13 +1,13 @@
 {
-  "name": "server",
+  "name": "chill-server",
   "scripts": {
-    "dev": "yarn db && NODE_ENV=development DEBUG=dev nodemon ./bin/www",
-    "debug": "yarn db && NODE_ENV=development DEBUG=dev node --inspect ./bin/www",
+    "dev": "npm run db:start && NODE_ENV=development DEBUG=dev nodemon ./bin/www",
+    "debug": "npm run db:start && NODE_ENV=development DEBUG=dev node --inspect ./bin/www",
     "start": "NODE_ENV=production ./node_modules/.bin/pm2-runtime ./bin/www -i max",
     "start:docker": "docker-compose up",
     "build:image": "docker-compose build",
     "db:start": "brew services start mongodb-community",
-    "lint": "eslint --fix --ignore-path .gitignore . src/"
+    "lint": "eslint --fix --ignore-path .gitignore src/"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",

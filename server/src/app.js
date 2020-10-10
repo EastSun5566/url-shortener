@@ -14,10 +14,7 @@ const {
   handleErrors,
 } = require('./middlewares');
 
-const indexRouter = require('./routes');
-const linksRouter = require('./routes/links');
-const usersRouter = require('./routes/users');
-const AuthRouter = require('./routes/auth');
+const router = require('./routers');
 
 (async () => {
   config({ path: `../env/.env.${process.env.NODE_ENV}` });
@@ -26,7 +23,6 @@ const AuthRouter = require('./routes/auth');
 
   const app = express();
 
-  // 中間件
   app.use(rateLimit);
   app.use(cors());
   app.use(compression());
@@ -36,11 +32,7 @@ const AuthRouter = require('./routes/auth');
   app.use(express.urlencoded({ extended: false }));
   app.use(cookieParser());
 
-  // 路由
-  app.use(indexRouter);
-  app.use('/v1/links', linksRouter);
-  app.use('/v1/users', usersRouter);
-  app.use('/v1/auth', AuthRouter);
+  app.use(router);
 
   app.use(handleNotFound);
   app.use(handleErrors);
