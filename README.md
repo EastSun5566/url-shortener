@@ -1,19 +1,21 @@
-# Chill 👌
+# Chill 🛀
 
-> 🔗 Chill 是個短網址... 抱歉，我是說長網址服務 🔥
+> 🔗 Chill 是個短網址... 抱歉，我是說長網址服務 😊
 
-## 展示 🖥
+## Demo 🖥
 
-- 前端： <https://chill.now.sh/>
-- 後端： <https://chill-api.herokuapp.com/>
+- Web： <https://chill.now.sh/>
+- API： <https://chill-shortener-api.herokuapp.com//>
 
-## 開發 🔧
+## Dev 🔧
 
 ```sh
+yarn
+
 yarn dev
 ```
 
-## 技術棧 ✨
+## Stack ✨
 
-- 前端： `Vue.js + Bootstrap`
-- 後端： `Express.js + MongoDB`
+- Frontend： `Vue.js + Bootstrap`
+- Backend： `Express.js + MongoDB`
