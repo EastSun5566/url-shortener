@@ -1,5 +1,5 @@
 {
-  "name": "chill",
+  "name": "chill-url-shortener",
   "version": "1.0.0",
   "description": "A chillest url shortener",
   "scripts": {
@@ -12,7 +12,8 @@
     "url": "git+https://github.com/EastSun5566/url-shortener.git"
   },
   "keywords": [
-    "url shortener",
+    "url",
+    "shortener",
     "chill"
   ],
   "author": "汪東陽 EastSun5566",
