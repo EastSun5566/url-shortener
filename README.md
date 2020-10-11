@@ -1,4 +1,4 @@
-# Chill 🛀
+# Chill URL Shortener 🛀
 
 [![License](https://img.shields.io/github/license/EastSun5566/url-shortener.svg?style=for-the-badge)](https://github.com/EastSun5566/url-shortener/blob/master/LICENSE)
 

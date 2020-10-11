@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const { redirectLink } = require('../controllers/root');
+const { redirectLink } = require('../controllers/home');
 
 router
   .get('/', (_req, res) => res.json({ '🔥': '歡迎來到最 Chill der 短網址 API 🎉' }))
