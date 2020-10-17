@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const { config } = require('dotenv');
 
-const { connectDB } = require('./db/mongodb');
+// const { connectDB } = require('./db/mongodb');
 const {
   rateLimit,
   handleNotFound,
@@ -15,9 +15,9 @@ const {
 const router = require('./routers');
 
 const createApp = async () => {
-  config({ path: `../env/.env.${process.env.NODE_ENV}` });
+  config({ path: `../.env.${process.env.NODE_ENV}` });
 
-  await connectDB();
+  // await connectDB();
 
   const app = express()
     .use(rateLimit)
