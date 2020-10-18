@@ -1,11 +1,10 @@
 {
   "name": "chill-api",
   "scripts": {
-    "dev": "NODE_ENV=development DEBUG=dev nodemon ./bin/www",
-    "debug": "npm run db:start && NODE_ENV=development DEBUG=dev node --inspect ./bin/www",
+    "start:dev": "NODE_ENV=development DEBUG=dev nodemon ./bin/www",
+    "start:debug": "NODE_ENV=development DEBUG=dev node --inspect ./bin/www",
     "start": "NODE_ENV=production pm2 ./bin/www -i max",
     "start:docker": "docker-compose up",
-    "db:start": "brew services start mongodb-community",
     "lint": "eslint --fix --ignore-path .gitignore src/"
   },
   "dependencies": {
