@@ -7,24 +7,20 @@ module.exports.createLink = async (req, res, next) => {
   const { user, body } = req;
   const { originalUrl, customizedPath } = body;
 
-  // 驗證請求
   const { error } = Link.validate({ originalUrl, customizedPath });
   if (error) {
     next(Boom.badRequest(error.details[0].message));
     return;
   }
 
-  // Emoji 化客製化路徑 🔥🚀👌
   const customizedPathWithEmoji = encodeURIComponent(`${getSomeCoolEmojis(50)}${customizedPath}${getSomeCoolEmojis(50)}`);
 
-  // 先查詢客製化路徑是否被用過
   const link = await Link.findOne({ customizedPath: customizedPathWithEmoji });
   if (link) {
     next(Boom.badRequest('這路徑有人用了 😢'));
     return;
   }
 
-  // DB 新增連結
   const newLink = new Link({
     originalUrl,
     customizedPath: customizedPathWithEmoji,
@@ -33,6 +29,8 @@ module.exports.createLink = async (req, res, next) => {
   });
   try {
     await newLink.save();
+
+    await Link.cache.set(customizedPathWithEmoji, originalUrl);
   } catch (errors) {
     const errorMassage = Object
       .values(errors)

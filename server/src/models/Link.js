@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
 
+const { createRedisClient } = require('../db/redis');
+
 const linkSchema = new mongoose.Schema({
   originalUrl: {
     type: String,
@@ -36,6 +38,18 @@ linkSchema.statics.validate = (link) => {
   });
 
   return Joi.validate(link, schema);
+};
+
+linkSchema.static.cache = {
+  set(path, url) {
+    const cache = createRedisClient();
+    return cache.set(path, url);
+  },
+
+  get(path) {
+    const cache = createRedisClient();
+    return cache.get(path);
+  },
 };
 
 module.exports = mongoose.model('Link', linkSchema);
