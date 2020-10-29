@@ -17,4 +17,6 @@ module.exports.redirectLink = async (req, res, next) => {
   }
 
   res.redirect(link.originalUrl);
+
+  Link.cache.set(customizedPath, link.originalUrl, 'ex', 60 * 60 * 24 * 7);
 };

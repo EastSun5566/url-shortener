@@ -29,8 +29,6 @@ module.exports.createLink = async (req, res, next) => {
   });
   try {
     await newLink.save();
-
-    await Link.cache.set(customizedPathWithEmoji, originalUrl);
   } catch (errors) {
     const errorMassage = Object
       .values(errors)
@@ -48,4 +46,6 @@ module.exports.createLink = async (req, res, next) => {
       userId,
       shortUrl: `${req.protocol}://${req.get('host')}/${decodeURIComponent(customizedPath)}`,
     });
+
+  Link.cache.set(customizedPathWithEmoji, originalUrl, 'ex', 60 * 60 * 24 * 7);
 };
