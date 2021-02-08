@@ -1,12 +1,10 @@
 {
-  "name": "chill-server",
+  "name": "chill-api",
   "scripts": {
-    "dev": "npm run db:start && NODE_ENV=development DEBUG=dev nodemon ./bin/www",
-    "debug": "npm run db:start && NODE_ENV=development DEBUG=dev node --inspect ./bin/www",
-    "start": "NODE_ENV=production ./node_modules/.bin/pm2-runtime ./bin/www -i max",
+    "start:dev": "NODE_ENV=development DEBUG=dev nodemon ./bin/www",
+    "start:debug": "NODE_ENV=development DEBUG=dev node --inspect ./bin/www",
+    "start": "NODE_ENV=production pm2 ./bin/www -i max",
     "start:docker": "docker-compose up",
-    "build:image": "docker-compose build",
-    "db:start": "brew services start mongodb-community",
     "lint": "eslint --fix --ignore-path .gitignore src/"
   },
   "dependencies": {
@@ -22,6 +20,7 @@
     "express-rate-limit": "^3.4.0",
     "get-some-cool-emojis": "^1.1.6",
     "helmet": "^3.16.0",
+    "ioredis": "^4.17.3",
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.5",
@@ -33,6 +32,7 @@
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.1",
     "husky": "^1.3.1",
+    "jest": "^26.5.2",
     "nodemon": "^1.18.10"
   }
 }

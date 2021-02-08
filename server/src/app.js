@@ -6,34 +6,34 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const { config } = require('dotenv');
 
-const { connectDB } = require('./db/mongodb');
-
 const {
   rateLimit,
   handleNotFound,
   handleErrors,
 } = require('./middlewares');
-
 const router = require('./routers');
 
-config({ path: `../env/.env.${process.env.NODE_ENV}` });
+const { createMongoDBClient } = require('./db/mongodb');
 
-connectDB();
+const createApp = async () => {
+  config({ path: `../.env.${process.env.NODE_ENV}` });
 
-const app = express();
+  await createMongoDBClient();
 
-app.use(rateLimit);
-app.use(cors());
-app.use(compression());
-app.use(helmet());
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+  const app = express()
+    .use(rateLimit)
+    .use(cors())
+    .use(compression())
+    .use(helmet())
+    .use(logger('dev'))
+    .use(express.json())
+    .use(express.urlencoded({ extended: false }))
+    .use(cookieParser())
+    .use(router)
+    .use(handleNotFound)
+    .use(handleErrors);
 
-app.use(router);
+  return app;
+};
 
-app.use(handleNotFound);
-app.use(handleErrors);
-
-module.exports = app;
+module.exports = createApp;
