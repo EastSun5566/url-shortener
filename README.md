@@ -7,7 +7,7 @@
 ## 🖥
 
 - Web client： <https://chill.now.sh/>
-- API server： <https://chill-shortener-api.herokuapp.com//>
+- API server： <https://chill-shortener-api.herokuapp.com/>
 
 ## 🔧
 
